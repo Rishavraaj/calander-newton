@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.main_container {
+    /* background-size: cover; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.calander {
+    width: 340px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid #CB1C8D;
+}
+
+.month__container {
+    display: flex;
+    justify-content: space-between;
+    /* background-color: red; */
+
+}
+
+.navigator{
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigator i{
+    cursor: pointer;
+}
+
+.week_container ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+    background: #CB1C8D;
+    padding: 10px 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.dates_container ul {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
+
+.dates_container ul li {
+    position: relative;
+    width: calc(100% / 7);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.dates_container ul li::before {
+    position: absolute;
+    content: '';
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dates_container ul li.inactive {
+    color: #5b56597e;
+}
+
+.dates_container ul li.active::before {
+    background: #CB1C8D;
+
+}
+
+.active {
+    color: #fff;
+}
+
+.dates_container ul li:hover:before {
+    background: #dfdff8;
+}
+
+.month_year {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.dates_container ul li.fasle::before {
+    background: #5F8D4E;
+}
+
+
+/* dark */
+
+.darkMode{
+    position: relative;
+    background: lightgrey;
+    width: 45px;
+    height: 20px;
+    border-radius: 25px;
+    float: right;
+    
+}
+
+.darkMode::before{
+    position: absolute;
+    content: '';
+    background: purple;
+    height: 100%;
+    width: 20px;
+    top: 0;
+    border-radius: 50%;
+    cursor: pointer;   
+}
+
+.s::before{
+    left: calc(45px - 20px);
+}
+
+.dark{
+    background: rgb(36, 34, 34);
+    color: white;
+    border: 2px solid white;
+}
+
+
+/* display */
+
+.darMode_display_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+
+.display >div{
+    /* color: #CB1C8D; */
+    color: orange;
+    font-weight: 600;
+    border: 2px solid orange;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
