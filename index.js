@@ -13,23 +13,25 @@ darkBtn.addEventListener('click', () => {
 
 let date = new Date();
 let currYear = date.getFullYear();
-let currmonth = date.getMonth();
+let currMonth = date.getMonth();
 
-if (currmonth <= 2) {
-    body.style.background = 'url("./img/winter.jpg")';
-    body.style.backgroundSize = 'cover';
-} if (currmonth > 2) {
-    body.style.background = 'url("./img/spring.jpg")';
-    body.style.backgroundSize = 'cover';
-} if (currmonth > 4) {
-    body.style.background = 'url("./img/summer.jpg")';
-    body.style.backgroundSize = 'cover';
-} if (currmonth > 8) {
-    body.style.background = 'url("./img/autumn.jpg")';
-    body.style.backgroundSize = 'cover';
+const bg = () =>{
+    if (currMonth <= 2) {
+        body.style.background = 'url("./img/winter.jpg")';
+        body.style.backgroundSize = 'cover';
+    } else if (currMonth > 2 && currMonth <= 3) {
+        body.style.background = 'url("./img/spring.jpg")';
+        body.style.backgroundSize = 'cover';
+    }else if (currMonth > 4 && currMonth <= 7) {
+        body.style.background = 'url("./img/summer.jpg")';
+        body.style.backgroundSize = 'cover';
+    } else if (currMonth > 8 && currMonth <= 11) {
+        body.style.background = 'url("./img/autumn.jpg")';
+        body.style.backgroundSize = 'cover';
+    }
 }
 
-console.log(currmonth);
+bg();
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -39,17 +41,17 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
 
 const clanderData = () => {
-    const prevMonthDay = new Date(currYear , currmonth, 1).getDay();
-    const CurrentMonth =  new Date(currYear , currmonth + 1, 0).getDate();
-    const lastDayOfNextMonth =  new Date(currYear, currmonth , CurrentMonth).getDay();
-    const LastDateofLastMonth =  new Date(currYear, currmonth, 0).getDate();
+    const prevMonthDay = new Date(currYear , currMonth, 1).getDay();
+    const CurrentMonth =  new Date(currYear , currMonth + 1, 0).getDate();
+    const lastDayOfNextMonth =  new Date(currYear, currMonth , CurrentMonth).getDay();
+    const LastDateofLastMonth =  new Date(currYear, currMonth, 0).getDate();
 
     let result = ''
     for (let i = prevMonthDay; i > 0; i--) {
-        result += `<li class= "inactive">${ LastDateofLastMonth - i + 1}</li>`    
+        result += `<li class= "inactive">${ LastDateofLastMonth - i + 1}</li>`   
     }
     for (let i = 1; i <= CurrentMonth; i++) {
-        let Today = i === date.getDate() && currmonth === new Date().getMonth() && 
+        let Today = i === date.getDate() && currMonth === new Date().getMonth() && 
         currYear === new Date().getFullYear() ? 'active' : '';
         result += `<li id="f" class='${Today}'>${i}</li>`    
     }
@@ -57,48 +59,31 @@ const clanderData = () => {
     for (let i = lastDayOfNextMonth; i < 6 ; i++) {
         result += `<li class="inactive">${i - lastDayOfNextMonth + 1}</li>`
     }
-    month.innerText = `${monthNames[currmonth]} ${currYear}`
+    month.innerText = `${monthNames[currMonth]} ${currYear}`
     dates.innerHTML = result;
 
 
     let listBtn = document.querySelectorAll("#f");
-    console.log(listBtn);
     listBtn.forEach((b) => {
         let displayDate = ""
         b.addEventListener('click',()=>{
-            displayDate = `<div> ${b.innerText} / ${monthNames[currmonth].slice(0, 3) } / ${currYear} </div>`
-            // console.log(monthNames[currmonth].slice(0,3));
+            displayDate = `<div> ${b.innerText} / ${monthNames[currMonth].slice(0, 3) } / ${currYear} </div>`
             display.innerHTML = displayDate;
         });
     });
 };
-
 clanderData();
 
 btn.forEach((button) =>{
     button.addEventListener('click', ()=>{
-        currmonth = button.id === 'right' ? currmonth + 1 : currmonth - 1;
+        currMonth = button.id === 'right' ? currMonth + 1 : currMonth - 1;
 
-        if(currmonth < 0 || currmonth > 11){
-            date = new Date(currYear , currmonth);
+        if(currMonth < 0 || currMonth > 11){
+            date = new Date(currYear , currMonth);
             currYear = date.getFullYear();
-            currmonth = date.getMonth();
+            currMonth = date.getMonth();
         }
-
-        if (currmonth <= 2){
-            body.style.background = 'url("./img/winter.jpg")';
-            body.style.backgroundSize = 'cover';
-        }if(currmonth > 2){
-            body.style.background = 'url("./img/spring.jpg")';
-            body.style.backgroundSize = 'cover';
-        }if(currmonth > 4){
-            body.style.background = 'url("./img/summer.jpg")';
-            body.style.backgroundSize = 'cover';
-        }if (currmonth > 8) {
-            body.style.background = 'url("./img/autumn.jpg")';
-            body.style.backgroundSize = 'cover';
-        }
-        
+        bg();
         clanderData();
     });
 });
